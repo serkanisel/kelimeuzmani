@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelimeUzmani.Model", "KelimeUzmani.Model\KelimeUzmani.Model.csproj", "{1AC2F78C-7CAE-4517-921C-0938A805B293}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelimeUzmani.Data", "KelimeUzmani.Data\KelimeUzmani.Data.csproj", "{F92C8139-406C-490A-B47D-1D2F1702E962}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AC2F78C-7CAE-4517-921C-0938A805B293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AC2F78C-7CAE-4517-921C-0938A805B293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AC2F78C-7CAE-4517-921C-0938A805B293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AC2F78C-7CAE-4517-921C-0938A805B293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F92C8139-406C-490A-B47D-1D2F1702E962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F92C8139-406C-490A-B47D-1D2F1702E962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F92C8139-406C-490A-B47D-1D2F1702E962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F92C8139-406C-490A-B47D-1D2F1702E962}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
