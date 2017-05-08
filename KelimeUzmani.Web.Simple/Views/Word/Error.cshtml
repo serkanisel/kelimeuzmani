@@ -1,0 +1,7 @@
+﻿<div class="alert alert-danger alertdiv" id="errorMessage">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    @ViewData["Error"]
+</div>
+<script>
+    $("#errorMessage").animate({ "right": "10px" }, "slow");
+</script>

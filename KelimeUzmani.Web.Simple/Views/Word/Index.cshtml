@@ -1,0 +1,59 @@
+﻿<h3>Kelimeler</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-group col-lg-4 padding0">
+            <label class="form-control-label" for="inputSuccess1">Kelime</label>
+            <input type="text" class="form-control form-control-info" id="txtWord">
+            @*<div class="form-control-feedback">Success! You've done it.</div>
+                <small class="form-text text-muted">Example help text that remains unchanged.</small>*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-4 padding0">
+            <label class="form-control-label" for="inputWarning1">Anlamı</label>
+            <input type="text" class="form-control form-control-info" id="txtMean">
+            @*<div class="form-control-feedback">Shucks, check the formatting of that and try again.</div>
+                <small class="form-text text-muted">Example help text that remains unchanged.</small>*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-6 padding0">
+            <label class="form-control-label" for="inputDanger1">Örnek Cümle</label>
+            <textarea id="txtSample" class="form-control form-control-info"></textarea>
+            @*<div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
+                <small class="form-text text-muted">Example help text that remains unchanged.</small>*@
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <a href="#" class="btn btn-md btn-outline-info" onclick="kelimeKaydet()"><i class="fa fa-save"></i> Kaydet</a>
+        </div>
+    </div>
+</div>
+<div id="result">
+
+</div>
+<script>
+    function kelimeKaydet() {
+        var word = $("#txtWord").val();
+        var mean = $("#txtMean").val();
+        var sample = $("#txtSample").val();
+
+        if (word == "")
+            return;
+        $.ajax({
+            url: '@Url.Action("SaveWord","Word")',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { word: word, mean: mean, sample: sample },
+            success: function (text, data) {
+                $("#result").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+</script>

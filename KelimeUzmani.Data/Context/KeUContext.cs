@@ -23,20 +23,20 @@ namespace KelimeUzmani.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //ilişkleri kuruyoruz. one-to-many olarak 
-            modelBuilder.Entity<WordListWords>()
-                .HasRequired<User>(x => x.User)
-                .WithMany(x => x.WordListWords)
-                .HasForeignKey(x => x.UserID);
+            //modelBuilder.Entity<WordList>()
+            //    .HasRequired<User>(x => x.User)
+            //    .WithMany(x => x.WordLists)
+            //    .HasForeignKey(x => x.UserID);
 
-            modelBuilder.Entity<WordListWords>()
-                .HasRequired<Word>(x => x.Word)
-                .WithMany(x => x.WordListWords)
-                .HasForeignKey(x => x.WordID);
+            //modelBuilder.Entity<WordListWords>()
+            //    .HasRequired<Word>(x => x.Word)
+            //    .WithMany(x => x.WordListWords)
+            //    .HasForeignKey(x => x.WordID);
 
-            modelBuilder.Entity<WordListWords>()
-                .HasRequired<WordList>(x => x.WordList)
-                .WithMany(x => x.WordListWords)
-                .HasForeignKey(x => x.WordListID);
+            //modelBuilder.Entity<WordListWords>()
+            //    .HasRequired<WordList>(x => x.WordList)
+            //    .WithMany(x => x.WordListWords)
+            //    .HasForeignKey(x => x.WordListID);
 
 
             base.OnModelCreating(modelBuilder);

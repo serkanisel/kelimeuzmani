@@ -1,0 +1,24 @@
+﻿@model IEnumerable<KelimeUzmani.Entity.WordListList>
+<table class="table table-striped" id="tblList">
+    <thead>
+        <tr>
+            <th>Adı</th>
+            <th>Kelime Sayısı</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int a = 0;
+            foreach (var item in Model)
+            {
+                a++;
+                <tr id="WordOfList_@item.ID">
+                    <th scope="row">@a.ToString()</th>
+                    <td>@item.Word.WordBody</td>
+                    <td>@item.Word.Description</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

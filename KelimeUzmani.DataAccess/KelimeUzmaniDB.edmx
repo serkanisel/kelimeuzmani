@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KeuDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SampleSentence">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WordID" Type="int" Nullable="false" />
+          <Property Name="Sentence" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Word">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WordBody" Type="varchar" MaxLength="255" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="WordList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WordListList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WordID" Type="int" Nullable="false" />
+          <Property Name="WordListID" Type="int" Nullable="false" />
+          <Property Name="isPublic" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SampleSentence_Word">
+          <End Role="Word" Type="Self.Word" Multiplicity="1" />
+          <End Role="SampleSentence" Type="Self.SampleSentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Word">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SampleSentence">
+              <PropertyRef Name="WordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WordListList_Word">
+          <End Role="Word" Type="Self.Word" Multiplicity="1" />
+          <End Role="WordListList" Type="Self.WordListList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Word">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WordListList">
+              <PropertyRef Name="WordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WordListList_WordList">
+          <End Role="WordList" Type="Self.WordList" Multiplicity="1" />
+          <End Role="WordListList" Type="Self.WordListList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WordList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WordListList">
+              <PropertyRef Name="WordListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KeuDBModelStoreContainer">
+          <EntitySet Name="SampleSentence" EntityType="Self.SampleSentence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Word" EntityType="Self.Word" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WordList" EntityType="Self.WordList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WordListList" EntityType="Self.WordListList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SampleSentence_Word" Association="Self.FK_SampleSentence_Word">
+            <End Role="Word" EntitySet="Word" />
+            <End Role="SampleSentence" EntitySet="SampleSentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WordListList_Word" Association="Self.FK_WordListList_Word">
+            <End Role="Word" EntitySet="Word" />
+            <End Role="WordListList" EntitySet="WordListList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WordListList_WordList" Association="Self.FK_WordListList_WordList">
+            <End Role="WordList" EntitySet="WordList" />
+            <End Role="WordListList" EntitySet="WordListList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KeuDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SampleSentence">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WordID" Type="Int32" Nullable="false" />
+          <Property Name="Sentence" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Word" Relationship="Self.FK_SampleSentence_Word" FromRole="SampleSentence" ToRole="Word" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Word">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WordBody" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SampleSentence" Relationship="Self.FK_SampleSentence_Word" FromRole="Word" ToRole="SampleSentence" />
+          <NavigationProperty Name="WordListList" Relationship="Self.FK_WordListList_Word" FromRole="Word" ToRole="WordListList" />
+        </EntityType>
+        <EntityType Name="WordList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WordListList" Relationship="Self.FK_WordListList_WordList" FromRole="WordList" ToRole="WordListList" />
+        </EntityType>
+        <EntityType Name="WordListList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WordID" Type="Int32" Nullable="false" />
+          <Property Name="WordListID" Type="Int32" Nullable="false" />
+          <Property Name="isPublic" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Word" Relationship="Self.FK_WordListList_Word" FromRole="WordListList" ToRole="Word" />
+          <NavigationProperty Name="WordList" Relationship="Self.FK_WordListList_WordList" FromRole="WordListList" ToRole="WordList" />
+        </EntityType>
+        <Association Name="FK_SampleSentence_Word">
+          <End Role="Word" Type="Self.Word" Multiplicity="1" />
+          <End Role="SampleSentence" Type="Self.SampleSentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Word">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SampleSentence">
+              <PropertyRef Name="WordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WordListList_Word">
+          <End Role="Word" Type="Self.Word" Multiplicity="1" />
+          <End Role="WordListList" Type="Self.WordListList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Word">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WordListList">
+              <PropertyRef Name="WordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WordListList_WordList">
+          <End Role="WordList" Type="Self.WordList" Multiplicity="1" />
+          <End Role="WordListList" Type="Self.WordListList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WordList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WordListList">
+              <PropertyRef Name="WordListID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KeuDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SampleSentence" EntityType="Self.SampleSentence" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Word" EntityType="Self.Word" />
+          <EntitySet Name="WordList" EntityType="Self.WordList" />
+          <EntitySet Name="WordListList" EntityType="Self.WordListList" />
+          <AssociationSet Name="FK_SampleSentence_Word" Association="Self.FK_SampleSentence_Word">
+            <End Role="Word" EntitySet="Word" />
+            <End Role="SampleSentence" EntitySet="SampleSentence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WordListList_Word" Association="Self.FK_WordListList_Word">
+            <End Role="Word" EntitySet="Word" />
+            <End Role="WordListList" EntitySet="WordListList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WordListList_WordList" Association="Self.FK_WordListList_WordList">
+            <End Role="WordList" EntitySet="WordList" />
+            <End Role="WordListList" EntitySet="WordListList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KeuDBModelStoreContainer" CdmEntityContainer="KeuDBEntities">
+          <EntitySetMapping Name="SampleSentence">
+            <EntityTypeMapping TypeName="KeuDBModel.SampleSentence">
+              <MappingFragment StoreEntitySet="SampleSentence">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WordID" ColumnName="WordID" />
+                <ScalarProperty Name="Sentence" ColumnName="Sentence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="KeuDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Word">
+            <EntityTypeMapping TypeName="KeuDBModel.Word">
+              <MappingFragment StoreEntitySet="Word">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WordBody" ColumnName="WordBody" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WordList">
+            <EntityTypeMapping TypeName="KeuDBModel.WordList">
+              <MappingFragment StoreEntitySet="WordList">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WordListList">
+            <EntityTypeMapping TypeName="KeuDBModel.WordListList">
+              <MappingFragment StoreEntitySet="WordListList">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WordID" ColumnName="WordID" />
+                <ScalarProperty Name="WordListID" ColumnName="WordListID" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -10,10 +10,7 @@ namespace KelimeUzmani.Model
 {
     public class Word
     {
-        public Word()
-        {
-            this.WordListWords = new List<WordListWords>();
-        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
@@ -25,6 +22,6 @@ namespace KelimeUzmani.Model
         public string Description { get; set; }
 
         
-        public virtual ICollection<WordListWords> WordListWords { get; set; }
+        
     }
 }
