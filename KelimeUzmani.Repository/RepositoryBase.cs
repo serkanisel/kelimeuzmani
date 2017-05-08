@@ -10,11 +10,11 @@ namespace KelimeUzmani.Repository
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity>, IDisposable
             where TEntity : class, new()
     {
-        private readonly KeuDBContext  _context;
+        private readonly KeuDBEntities _context;
 
         public RepositoryBase(bool ProxyCreationEnabled = true)
         {
-            _context = new KeuDBContext();
+            _context = new KeuDBEntities();
             _context.Configuration.LazyLoadingEnabled = true;
             _context.Configuration.ProxyCreationEnabled = ProxyCreationEnabled;
         }

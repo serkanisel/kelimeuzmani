@@ -9,13 +9,13 @@
 
 namespace KelimeUzmani.DataAccess
 {
-    using Entity;
+    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-    public partial class KeuDBContext : DbContext
+    using Entity;
+    public partial class KeuDBEntities : DbContext
     {
-        public KeuDBContext()
+        public KeuDBEntities()
             : base("name=KeuDBEntities")
         {
         }
