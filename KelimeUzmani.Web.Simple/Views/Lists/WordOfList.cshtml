@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<KelimeUzmani.Entity.WordListList>
-<table class="table table-striped" id="tblList">
+@*<table class="table table-striped" id="tblList">
     <thead>
         <tr>
             <th>Adı</th>
@@ -21,4 +21,23 @@
             }
         }
     </tbody>
-</table>
+</table>*@
+
+@foreach (var item in Model)
+{
+    <div class="row padding10 col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-3">
+            @item.Word.WordBody
+        </div>
+        <div class="col-lg-3">
+            @item.Word.Description
+        </div>
+        <div class="col-lg-2">
+            <a href="#" class="btn btn-sm btn-outline-danger"><i class="fa fa-minus-circle"></i></a>
+        </div>
+    </div>
+}
+@if (Model.Count() == 0)
+{
+    <span><small> kelime bulunamadı </small></span>
+}

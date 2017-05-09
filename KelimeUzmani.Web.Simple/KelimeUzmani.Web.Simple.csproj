@@ -304,6 +304,8 @@
     <Content Include="Views\Lists\Message.cshtml" />
     <Content Include="Views\Lists\ListView.cshtml" />
     <Content Include="Views\Lists\WordOfList.cshtml" />
+    <Content Include="Views\Word\SearchList.cshtml" />
+    <Content Include="Views\Word\GetSearchWord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

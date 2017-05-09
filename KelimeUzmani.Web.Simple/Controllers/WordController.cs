@@ -17,6 +17,7 @@ namespace KelimeUzmani.Web.Simple.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult SaveWord(string word, string mean, string sample)
         {
             try
@@ -49,6 +50,23 @@ namespace KelimeUzmani.Web.Simple.Controllers
 
             
 
+        }
+
+        [HttpPost]
+        public ActionResult SearchWord(string searchText,int listID)
+        {
+            IWord iword = new WordBS();
+
+            List<Word> result= iword.SearchWord(searchText);
+            ViewBag.ID = listID;
+            return PartialView("SearchList", result);
+        }
+
+        [HttpGet]
+        public ActionResult GetSearchWord(int listID=0)
+        {
+            ViewBag.ID = listID;
+            return PartialView();
         }
     }
 }

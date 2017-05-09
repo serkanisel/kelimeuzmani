@@ -35,5 +35,11 @@ namespace KelimeUzmani.Web.Simple.Controllers
             return PartialView("ListView",list);
         }
 
+        [HttpPost]
+        public ActionResult GetWordsOfList(int listID)
+        {
+            return PartialView("WordOfList", iList.GetListByID(listID).WordListList);
+        }
+
        }
 }

@@ -9,6 +9,8 @@ namespace KelimeUzmani.UnitOfWork.Contract
 {
     public interface IWord
     {
-        Word SaveWord(Word word); 
+        Word SaveWord(Word word);
+
+        List<Word> SearchWord(string searchText);
     }
 }

@@ -9,8 +9,13 @@ using KelimeUzmani.Repository;
 
 namespace KelimeUzmani.UnitOfWork.UOW
 {
-    public class WordBS : IWord
+    public class WordBS : IWord, IDisposable
     {
+        public void Dispose()
+        {
+            this.Dispose();
+        }
+
         public Word SaveWord(Word word)
         {
             RepositoryBase<Word> _rep = new RepositoryBase<Word>();
@@ -27,6 +32,14 @@ namespace KelimeUzmani.UnitOfWork.UOW
 
 
             return word;
+        }
+
+        public List<Word> SearchWord(string searchText)
+        {
+            RepositoryBase<Word> _rep = new RepositoryBase<Word>();
+
+            return _rep.GetList(p => p.WordBody.StartsWith(searchText));
+
         }
     }
 }

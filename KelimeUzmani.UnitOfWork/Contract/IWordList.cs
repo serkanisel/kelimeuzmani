@@ -11,5 +11,7 @@ namespace KelimeUzmani.UnitOfWork.Contract
     {
         List<WordList> GetUserLists(int userID);
         WordList SaveWordList(WordList wordList);
+
+        WordList GetListByID(int listID);
     }
 }

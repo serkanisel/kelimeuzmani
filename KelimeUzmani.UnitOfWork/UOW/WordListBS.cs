@@ -9,8 +9,21 @@ using KelimeUzmani.Repository;
 
 namespace KelimeUzmani.UnitOfWork.UOW
 {
-    public class WordListBS : IWordList
+    public class WordListBS : IWordList, IDisposable
     {
+        public void Dispose()
+        {
+            this.Dispose();
+        }
+
+        public WordList GetListByID(int listID)
+        {
+            RepositoryBase<WordList> _rep = new RepositoryBase<WordList>();
+
+            return _rep.Get(p => p.ID == listID);
+
+        }
+
         public List<WordList> GetUserLists(int userID)
         {
             RepositoryBase<WordList> _rep = new RepositoryBase<WordList>();
@@ -29,6 +42,8 @@ namespace KelimeUzmani.UnitOfWork.UOW
        
             return wordList;
         }
+
+
 
 
     }
