@@ -1,49 +1,66 @@
 ﻿@model List<KelimeUzmani.Entity.Word>
 
 @*<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>word</th>
-            <th>description</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int a = 0;
-            foreach (var item in Model)
-            {
-                a++;
-                <tr id="WordOfList_@item.ID">
-                    <th scope="row">@a.ToString()</th>
-                    <td>@item.WordBody</td>
-                    <td>@item.Description</td>
-                    <td><a href="#" class="btn btn-sm"><i class="fa fa-plus-circle"></i></a></td>
-                </tr>
+        <thead>
+            <tr>
+                <th>word</th>
+                <th>description</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int a = 0;
+                foreach (var item in Model)
+                {
+                    a++;
+                    <tr id="WordOfList_@item.ID">
+                        <th scope="row">@a.ToString()</th>
+                        <td>@item.WordBody</td>
+                        <td>@item.Description</td>
+                        <td><a href="#" class="btn btn-sm"><i class="fa fa-plus-circle"></i></a></td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
-</table>*@
+        </tbody>
+    </table>*@
 
 @*listID viewbag.ID*@
-
-
-    @foreach (var item in Model)
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <span class="gridTitle">Kelime</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <span class="gridTitle">Anlamı</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 float-right">
+        <span class="gridTitle">Örnek Cümle</span>
+    </div>
+</div>
+@if (Model != null)
+{
+    foreach (var item in Model)
     {
         <div class="row padding10">
-            <div class="col-lg-3">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 @item.WordBody
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 @item.Description
             </div>
-            <div class="col-lg-2">
-                <a href="#" class="btn btn-sm btn-outline-info"><i class="fa fa-plus-circle"></i></a>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 float-right">
+               @if (ViewBag.fromIndex != 1)
+               { <a href="#" class="btn btn-sm btn-outline-info"><i class="fa fa-plus-circle"></i></a>}
+               else if (item.SampleSentence!=null)
+               {
+                   @item.SampleSentence.FirstOrDefault().Sentence
+               }
             </div>
         </div>
     }
-    @if (Model.Count == 0)
+    if (Model.Count == 0)
     {
         <span><small> kelime bulunamadı </small></span>
     }
+}

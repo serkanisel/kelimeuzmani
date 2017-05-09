@@ -16,6 +16,13 @@ namespace KelimeUzmani.UnitOfWork.UOW
             this.Dispose();
         }
 
+        public List<Word> GetUserWords(int userID)
+        {
+            RepositoryBase<Word> _rep = new RepositoryBase<Word>();
+
+            return _rep.GetList(p => p.UserID == userID);
+        }
+
         public Word SaveWord(Word word)
         {
             RepositoryBase<Word> _rep = new RepositoryBase<Word>();

@@ -30,7 +30,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #efefef;
+    background: #f8f8f8;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -64,7 +64,7 @@
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
+    text-indent: 5px;
     line-height: 40px;
 }
 

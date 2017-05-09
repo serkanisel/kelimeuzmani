@@ -13,33 +13,33 @@
     <link href="~/Content/simple-sidebar.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
-<body >
+<body>
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                        Kelime UZMANI
+                    Kelime UZMANI
                 </li>
                 <li>
-                    <a href="@Url.Action("Index","Word")">Kelimelerim</a>
+                    <a href="@Url.Action("Index","Word")" id="menu1"><i class="fa fa-file-word-o"></i> Kelimelerim</a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Index","Lists")">Listeler</a>
+                    <a href="@Url.Action("Index","Lists")" id="menu2"><i class="fa fa-list-ul"></i> Listeler</a>
                 </li>
                 <li>
-                    <a href="#">Çalışma Ekranı</a>
+                    <a href="javascript:void(0)" id="menu3"><i class="fa fa-cogs"></i> Çalışma Ekranı</a>
                 </li>
                 <li>
-                    <a href="#">Okuma Parçaları</a>
+                    <a href="javascript:void(0)" id="menu4"><i class="fa fa-book"></i> Okuma Parçaları</a>
                 </li>
                 <li>
-                    <a href="#">Profilim</a>
+                    <a href="javascript:void(0)" id="menu5"><i class="fa fa-user"></i> Profilim</a>
                 </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
-        <!-- Page Content --> 
+        <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -54,17 +54,15 @@
     </div>
     <!-- /#wrapper -->
 
-
-
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
     </script>
 </body>
 </html>

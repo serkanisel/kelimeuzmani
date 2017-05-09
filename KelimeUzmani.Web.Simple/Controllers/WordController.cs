@@ -12,9 +12,13 @@ namespace KelimeUzmani.Web.Simple.Controllers
     public class WordController : Controller
     {
         // GET: Word
+        IWord iWord = new WordBS();
+
         public ActionResult Index()
         {
-            return View();
+            List<Word> result = iWord.GetUserWords(1); // kullanıcının id'si gelecek bu kısıma.
+            ViewBag.fromIndex = 1;
+            return View(result);
         }
 
         [HttpPost]
@@ -22,11 +26,11 @@ namespace KelimeUzmani.Web.Simple.Controllers
         {
             try
             {
-                IWord iWord = new WordBS();
                 Word oWord = new Word()
                 {
                     Description = mean,
                     WordBody = word,
+                    UserID=1,
                 };
 
                 oWord.SampleSentence = new List<SampleSentence>();
@@ -55,9 +59,8 @@ namespace KelimeUzmani.Web.Simple.Controllers
         [HttpPost]
         public ActionResult SearchWord(string searchText,int listID)
         {
-            IWord iword = new WordBS();
 
-            List<Word> result= iword.SearchWord(searchText);
+            List<Word> result= iWord.SearchWord(searchText);
             ViewBag.ID = listID;
             return PartialView("SearchList", result);
         }
@@ -67,6 +70,14 @@ namespace KelimeUzmani.Web.Simple.Controllers
         {
             ViewBag.ID = listID;
             return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult GetUserWords(int userID)
+        {
+            List<Word> result = iWord.GetUserWords(1); // kullanıcının id'si gelecek bu kısıma.
+            ViewBag.fromIndex = 1;
+            return PartialView("SearchList", result);
         }
     }
 }

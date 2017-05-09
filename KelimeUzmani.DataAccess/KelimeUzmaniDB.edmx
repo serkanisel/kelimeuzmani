@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KeuDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KeuDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="SampleSentence">
           <Key>
             <PropertyRef Name="ID" />
@@ -30,6 +30,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WordBody" Type="varchar" MaxLength="255" />
           <Property Name="Description" Type="varchar(max)" />
+          <Property Name="UserID" Type="int" />
         </EntityType>
         <EntityType Name="WordList">
           <Key>
@@ -57,6 +58,18 @@
             </Principal>
             <Dependent Role="SampleSentence">
               <PropertyRef Name="WordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Word_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Word" Type="Self.Word" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Word">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -94,6 +107,10 @@
             <End Role="Word" EntitySet="Word" />
             <End Role="SampleSentence" EntitySet="SampleSentence" />
           </AssociationSet>
+          <AssociationSet Name="FK_Word_User" Association="Self.FK_Word_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Word" EntitySet="Word" />
+          </AssociationSet>
           <AssociationSet Name="FK_WordListList_Word" Association="Self.FK_WordListList_Word">
             <End Role="Word" EntitySet="Word" />
             <End Role="WordListList" EntitySet="WordListList" />
@@ -103,8 +120,7 @@
             <End Role="WordListList" EntitySet="WordListList" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KeuDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -126,6 +142,7 @@
           <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Word" Relationship="KeuDBModel.FK_Word_User" FromRole="User" ToRole="Word" />
         </EntityType>
         <EntityType Name="Word">
           <Key>
@@ -136,6 +153,8 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SampleSentence" Relationship="Self.FK_SampleSentence_Word" FromRole="Word" ToRole="SampleSentence" />
           <NavigationProperty Name="WordListList" Relationship="Self.FK_WordListList_Word" FromRole="Word" ToRole="WordListList" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="KeuDBModel.FK_Word_User" FromRole="Word" ToRole="User" />
         </EntityType>
         <EntityType Name="WordList">
           <Key>
@@ -211,7 +230,23 @@
             <End Role="WordList" EntitySet="WordList" />
             <End Role="WordListList" EntitySet="WordListList" />
           </AssociationSet>
+          <AssociationSet Name="FK_Word_User" Association="KeuDBModel.FK_Word_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Word" EntitySet="Word" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Word_User">
+          <End Type="KeuDBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="KeuDBModel.Word" Role="Word" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Word">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -241,6 +276,7 @@
           <EntitySetMapping Name="Word">
             <EntityTypeMapping TypeName="KeuDBModel.Word">
               <MappingFragment StoreEntitySet="Word">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="WordBody" ColumnName="WordBody" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

@@ -24,10 +24,12 @@ namespace KelimeUzmani.Entity
         public int ID { get; set; }
         public string WordBody { get; set; }
         public string Description { get; set; }
+        public Nullable<int> UserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SampleSentence> SampleSentence { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WordListList> WordListList { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -38,6 +38,7 @@ textarea {
     position:fixed;
     right:-200px;
     max-width:800px;
+    z-index:1500;
 }
 
 .padding0 {
@@ -59,4 +60,14 @@ textarea {
 .listRow :hover {
     border-color:#0094ff;
    
+}
+
+.pageTitle {
+    font-style:italic;
+    color:#ffcc00;
+}
+
+.gridTitle{
+    font-weight:bold;
+    color:#808080;
 }

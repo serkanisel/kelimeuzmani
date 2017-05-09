@@ -13,6 +13,7 @@
         <AssociationConnector Association="KeuDBModel.FK_SampleSentence_Word" ManuallyRouted="false" />
         <AssociationConnector Association="KeuDBModel.FK_WordListList_Word" ManuallyRouted="false" />
         <AssociationConnector Association="KeuDBModel.FK_WordListList_WordList" ManuallyRouted="false" />
+        <AssociationConnector Association="KeuDBModel.FK_Word_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

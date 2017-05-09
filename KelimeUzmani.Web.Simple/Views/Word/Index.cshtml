@@ -1,5 +1,7 @@
-﻿<h3>Kelimeler</h3>
-<div class="container-fluid">
+﻿@model List<KelimeUzmani.Entity.Word>
+<h3 class="pageTitle">Kelimeler</h3>
+<a href="javascript:void(0)" class="btn btn-outline-info" data-toggle="collapse" data-target="#yeniKelimeDiv"><i class="fa fa-plus"></i> yeni kelime</a>
+<div class="container-fluid collapse" id="yeniKelimeDiv">
     <div class="row">
         <div class="form-group col-lg-4 padding0">
             <label class="form-control-label" for="inputSuccess1">Kelime</label>
@@ -30,6 +32,9 @@
         </div>
     </div>
 </div>
+<div class="container-fluid rowlist" id="userWordsList">
+        @Html.Partial("SearchList",Model)
+</div>
 <div id="result">
 
 </div>
@@ -49,6 +54,24 @@
             data: { word: word, mean: mean, sample: sample },
             success: function (text, data) {
                 $("#result").html(text);
+                GetList();
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function GetList() {
+        console.log("geldi");
+        $.ajax({
+            url: '@Url.Action("GetUserWords", "Word")',
+            type: "POST",
+            cache: false,
+            async: false,
+            data: { userID: 1 },
+            success: function (text, data) {
+                $("#userWordsList").html(text);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("bir hata oluştu");

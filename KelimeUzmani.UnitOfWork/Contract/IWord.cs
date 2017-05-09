@@ -12,5 +12,7 @@ namespace KelimeUzmani.UnitOfWork.Contract
         Word SaveWord(Word word);
 
         List<Word> SearchWord(string searchText);
+
+        List<Word> GetUserWords(int userID);
     }
 }
