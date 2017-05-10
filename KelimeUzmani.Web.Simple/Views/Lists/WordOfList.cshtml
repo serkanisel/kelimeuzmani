@@ -22,18 +22,20 @@
         }
     </tbody>
 </table>*@
-
+<h6 class="altList">Listenin Kelimeleri</h6>
 @foreach (var item in Model)
 {
-    <div class="row padding10 col-lg-12 col-md-12 col-sm-12">
+    <div class="row  col-lg-12 col-md-12 col-sm-12">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             @item.Word.WordBody
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             @item.Word.Description
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 float-lg-right">
-            <a href="#" class="btn btn-sm btn-outline-danger"><i class="fa fa-minus-circle"></i></a>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="float-right">
+                <a href="#" class="btn btn-sm btn-outline-danger"><i class="fa fa-minus-circle"></i></a>
+            </div>
         </div>
     </div>
 }

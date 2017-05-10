@@ -64,10 +64,20 @@ textarea {
 
 .pageTitle {
     font-style:italic;
-    color:#ffcc00;
+    color:#607D8B;
 }
 
 .gridTitle{
     font-weight:bold;
     color:#808080;
+}
+
+.nav-tabs .nav-link.active {
+    color:#808080;
+    background-color:#ffd800;
+}
+
+.altList {
+    color:#607D8B;
+    font-style:italic;
 }
