@@ -1,31 +1,31 @@
 ﻿@model IEnumerable<KelimeUzmani.Entity.WordListList>
 @*<table class="table table-striped" id="tblList">
-    <thead>
-        <tr>
-            <th>Adı</th>
-            <th>Kelime Sayısı</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int a = 0;
-            foreach (var item in Model)
-            {
-                a++;
-                <tr id="WordOfList_@item.ID">
-                    <th scope="row">@a.ToString()</th>
-                    <td>@item.Word.WordBody</td>
-                    <td>@item.Word.Description</td>
-                </tr>
+        <thead>
+            <tr>
+                <th>Adı</th>
+                <th>Kelime Sayısı</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int a = 0;
+                foreach (var item in Model)
+                {
+                    a++;
+                    <tr id="WordOfList_@item.ID">
+                        <th scope="row">@a.ToString()</th>
+                        <td>@item.Word.WordBody</td>
+                        <td>@item.Word.Description</td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
-</table>*@
+        </tbody>
+    </table>*@
 <h6 class="altList">Listenin Kelimeleri</h6>
 @foreach (var item in Model)
 {
-    <div class="row  col-lg-12 col-md-12 col-sm-12">
+    <div class="row col-lg-12 col-md-12 col-sm-12">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
             @item.Word.WordBody
         </div>

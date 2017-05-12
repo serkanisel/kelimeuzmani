@@ -1,72 +1,73 @@
 ﻿@model IEnumerable<KelimeUzmani.Entity.WordList>
 
 @{
-            int a = 0;
-            foreach (var item in Model)
-            {
-                a++;
-        <div class="row margin5 listRow">
-            @*<div class="col-lg-9">
-                        @item.Name<br />
-                        <span class="align-bottom">
-                            <small>words count: @item.WordListList.Count</small>
-                        </span>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="float-right">
-                            <a href="#" class="btn btn-sm btn-outline-primary" ><i class="fa fa-list"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa fa-minus-circle"></i></a>
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa fa-address-book"></i></a>
-                        </div>
-                    </div>
-                </div>*@
-            <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12 card card-outline-secondary">
-                <div class="card-block">
-                    <h5 class="card-title">@item.Name</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Word Count:@item.WordListList.Count</h6>
-                    <div class="float-right">
+    int a = 0;
+    foreach (var item in Model)
+    {
+        a++;
+        <div class="row listItem" onmouseover="itemover(@item.ID)">
+            <div class="col-lg-12 ">
+                <div id="list_@item.ID" class="float-left">
+                    <span class="col-form-label">@item.Name</span><br />
+                    <span class="col-form-label">Word Count: @item.WordListList.Count</span>
+                </div>
+                <div class="float-right sagmenu" id="menu_@item.ID" style="display:none;">
+                    @*<a  class="btn btn-secondary" onclick="Words(@item.ID)"><i class="fa fa-list"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-secondary" onclick="KelimeEkle(@item.ID)"><i class="fa fa-plus-square-o"></i></a>
+                    <a href="" class="btn btn-secondary"><i class="fa fa-wheelchair"></i></a>*@
 
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link  btn btn-sm btn-outline-primary" data-toggle="tab" href="#words_@item.ID" role="tab" onclick="Words(@item.ID)"><i class="fa fa-list"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-sm btn-outline-primary" data-toggle="tab" href="#wordsadd_@item.ID" role="tab" onclick="KelimeEkle(@item.ID)"><i class="fa fa-plus-circle"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link btn btn-sm btn-outline-primary" data-toggle="tab" href="#wordsnew_@item.ID" role="tab"><i class="fa fa-plus-square"></i></a>
-                            </li>
-                        </ul>
-
-                    </div>
+                    <nav class="nav nav-pills flex-column flex-sm-row">
+                        <a href="#words_@item.ID" class="flex-sm-fill text-sm-center nav-link active btn btn-secondary"onclick="Words(@item.ID)"><i class="fa fa-list"></i></a>
+                        <a href="#wordsadd_@item.ID" class="flex-sm-fill text-sm-center nav-link active btn btn-secondary" onclick="KelimeEkle(@item.ID)"><i class="fa fa-plus-square-o"></i></a>
+                        <a class="flex-sm-fill text-sm-center nav-link btn btn-secondary" href="#"><i class="fa fa-wheelchair"></i></a>
+                    </nav>
                 </div>
 
-                <div class="tab-content">
-                    <div class="tab-pane  col-lg-12" role="tabpanel" id="words_@item.ID" style="margin-bottom:10px;">
-                        
-                    </div>
-                    <div class="tab-pane  col-lg-12" role="tabpanel" id="wordsadd_@item.ID" style="margin-bottom:10px;">
-                        
-                    </div>
-                    <div class="tab-pane  col-lg-12" role="tabpanel" id="wordsnew_@item.ID" style="margin-bottom:10px;">
-                        
-                    </div>
-                </div>
+              
+            </div>
 
-
+            <div class="tab-content">
+                <div class="tab-pane"  role="tabpanel"  id="words_@item.ID">...</div>
+                <div class="tab-pane" id="wordsadd_@item.ID" role="tabpanel">...</div>
 
             </div>
+
+        
         </div>
     }
 }
 
 <script>
+    function Click(ID) {
+        //$("div").removeClass("card-warning");
+
+        var divname = "#list_" + ID;
+        var tabContent = "#tabContent_" + ID;
+        //$(divname).addClass("card-warning");
+
+        $(".tabslist").hide();
+        $(".contentTab").hide();
+
+        var tablist = "#listTabs_" + ID;
+        $(tablist).show();
+        $(tabContent).show();
+
+
+    }
+
+    function itemover(ID) {
+        $(".sagmenu").css("display","none");
+
+        var sagmenu="#menu_" + ID;
+        $(sagmenu).addClass("sagmenu");
+        $(sagmenu).show();
+    }
 
     function Words(ID) {
         var name = "#words_" + ID;
         //var nameWordsAdd = "#wordsadd_" + ID;
 
-        //$(nameWordsAdd).hide();
+        
         $.ajax({
             url: '@Url.Action("GetWordsOfList", "Lists")',
             type: "POST",
@@ -86,7 +87,7 @@
     function KelimeEkle(ID) {
         var name = "#wordsadd_" + ID;
         //var nameWords = "#words_" + ID;
-        //$(nameWords).hide();
+        
         $.ajax({
             url: '@Url.Action("GetSearchWord", "Word")',
             type: "GET",

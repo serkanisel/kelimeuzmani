@@ -24,60 +24,22 @@ textarea {
     border-radius:0;*/
 }
 
-.margin0 {
-    margin:0px;
+.constantmenu {
+    top: 70px;
+    position: fixed;
+    left: 20px;
+    height: 200px;
+    max-height: 200px;
+    overflow: auto;
+    background-color: #ddd;
+    width: 250px;
+    color: #0d7bf2;
 }
 
-.margin5{
-    margin:5px;
-}
-
-.alertdiv {
-    margin-top:5px;
-    top:20px;
-    position:fixed;
-    right:-200px;
-    max-width:800px;
-    z-index:1500;
-}
-
-.padding0 {
-    padding:0px;
-}
-
-.rowlist{
-    min-height:50px;
-    background-color:#fafafa;
-    margin-top:10px;
-    margin-bottom:10px;
-    padding:5px;
-}
-
-.padding10 {
-    padding:10px;
-}
-
-.listRow :hover {
-    border-color:#0094ff;
-   
-}
-
-.pageTitle {
-    font-style:italic;
-    color:#607D8B;
-}
-
-.gridTitle{
-    font-weight:bold;
-    color:#808080;
-}
-
-.nav-tabs .nav-link.active {
-    color:#808080;
-    background-color:#ffd800;
-}
-
-.altList {
-    color:#607D8B;
-    font-style:italic;
+.listItem {
+    margin-bottom: 5px;
+    padding: 10px;
+    height: auto;
+    background-color: #efefef;
+    transition: height 0.15s ease;
 }

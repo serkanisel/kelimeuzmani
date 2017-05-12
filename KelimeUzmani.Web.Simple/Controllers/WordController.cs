@@ -59,6 +59,8 @@ namespace KelimeUzmani.Web.Simple.Controllers
         [HttpPost]
         public ActionResult SearchWord(string searchText,int listID)
         {
+            if(searchText==string.Empty)
+                return PartialView("SearchList", null);
 
             List<Word> result= iWord.SearchWord(searchText);
             ViewBag.ID = listID;

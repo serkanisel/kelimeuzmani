@@ -25,7 +25,7 @@ namespace KelimeUzmani.Web.Simple.Controllers
             WordList wl = new WordList()
             {
                 Name = name,
-                UserID = 1
+                UserID = 2
             };
 
             wl = iList.SaveWordList(wl);
