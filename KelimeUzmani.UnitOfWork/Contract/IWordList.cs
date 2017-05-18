@@ -13,5 +13,9 @@ namespace KelimeUzmani.UnitOfWork.Contract
         WordList SaveWordList(WordList wordList);
 
         WordList GetListByID(int listID);
+
+        void AddWordToList(int listID, int wordID);
+
+        List<WordListList> GetWordLists(int listID);
     }
 }

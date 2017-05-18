@@ -1,82 +1,107 @@
 ﻿@model IEnumerable<KelimeUzmani.Entity.WordList>
-
-@{
-    int a = 0;
-    foreach (var item in Model)
-    {
-        a++;
-        <div class="row listItem" onmouseover="itemover(@item.ID)">
-            <div class="col-lg-12 ">
-                <div id="list_@item.ID" class="float-left">
-                    <span class="col-form-label">@item.Name</span><br />
-                    <span class="col-form-label">Word Count: @item.WordListList.Count</span>
-                </div>
-                <div class="float-right sagmenu" id="menu_@item.ID" style="display:none;">
-                    @*<a  class="btn btn-secondary" onclick="Words(@item.ID)"><i class="fa fa-list"></i></a>
-                    <a href="javascript:void(0)" class="btn btn-secondary" onclick="KelimeEkle(@item.ID)"><i class="fa fa-plus-square-o"></i></a>
-                    <a href="" class="btn btn-secondary"><i class="fa fa-wheelchair"></i></a>*@
-
-                    <nav class="nav nav-pills flex-column flex-sm-row">
-                        <a href="#words_@item.ID" class="flex-sm-fill text-sm-center nav-link active btn btn-secondary"onclick="Words(@item.ID)"><i class="fa fa-list"></i></a>
-                        <a href="#wordsadd_@item.ID" class="flex-sm-fill text-sm-center nav-link active btn btn-secondary" onclick="KelimeEkle(@item.ID)"><i class="fa fa-plus-square-o"></i></a>
-                        <a class="flex-sm-fill text-sm-center nav-link btn btn-secondary" href="#"><i class="fa fa-wheelchair"></i></a>
-                    </nav>
-                </div>
-
-              
-            </div>
-
-            <div class="tab-content">
-                <div class="tab-pane"  role="tabpanel"  id="words_@item.ID">...</div>
-                <div class="tab-pane" id="wordsadd_@item.ID" role="tabpanel">...</div>
-
-            </div>
-
-        
-        </div>
+<style>
+    .borderOrange {
+        -webkit-transition: all 500ms linear;
+        -ms-transition: all 500ms linear;
+        transition: all 500ms linear;
+        height: 80px;
+        cursor:pointer;
     }
-}
+
+        .borderOrange:hover {
+            box-shadow: 0px 2px 2px #d1d1d1;
+            -moz-box-shadow: 0px 2px 2px #d1d1d1;
+            -webkit-box-shadow: 0px 2px 2px #d1d1d1;
+            -webkit-transition: all 500ms linear;
+            -ms-transition: all 500ms linear;
+            transition: all 500ms linear;
+            background-color: #fafafa;
+            color: #000;
+        }
+
+    .border {
+        box-shadow: 0px 2px 2px #d1d1d1;
+        -moz-box-shadow: 0px 2px 2px #d1d1d1;
+        -webkit-box-shadow: 0px 2px 2px #d1d1d1;
+        background-color: #ddd;
+        color: #000;
+    }
+
+    #selectedList {
+        height:40px;
+        /*border-radius:10px;*/
+        border-bottom:1px solid #d1d1d1;
+    }
+
+    .ContentDiv {
+        height: 200px;
+    }
+</style>
+
+<div class="row" id="WordListsGroup">
+    @{
+        int a = 0;
+        foreach (var item in Model)
+        {
+            a++;
+            <div class="col-lg-4 col-md-4 col-sm-3 borderOrange" id="list_@item.ID" onclick="GetContent(@item.ID)">
+                <div id="list_@item.ID" class="float-left">
+                    <span class="col-form-label" id="wordname_@item.ID">@item.Name</span><br />
+                    <span class="col-form-label" id="wordcount_@item.ID">Word Count: @item.WordListList.Count</span>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+<div class="ContentDiv" id="ContentDiv" style="display:none;">
+    <div id="selectedList" class="col-sm-12">
+        <div class="float-left">
+            <span id="itemName" style="font-weight:bold;"></span>
+            <input type="hidden" id="listID" />
+        </div>
+        <div class="float-right">
+            <span class="badge badge-pill badge-info" id="WordCount">Default</span>
+        </div>
+    </div>
+
+    <div id="WordsList" class="col-sm-12 padding0">
+
+    </div>
+
+    <div class="float-right">
+        <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm" onclick="backtoList()"><i class="fa fa-chevron-circle-left"></i> Back to List</a>
+    </div>
+
+</div>
 
 <script>
-    function Click(ID) {
-        //$("div").removeClass("card-warning");
+    function GetContent(ID) {
+        var list="#list_"+ID;
 
-        var divname = "#list_" + ID;
-        var tabContent = "#tabContent_" + ID;
-        //$(divname).addClass("card-warning");
+        var name="#wordname_" + ID;
+        var count="#wordcount_" + ID;
+        
+        $("#itemName").text($(name).text());
+        $("#WordCount").text($(count).text());
+        
+        $(".borderOrange").removeClass("border");
+        $(list).addClass("border");
 
-        $(".tabslist").hide();
-        $(".contentTab").hide();
+        $("#WordListsGroup").slideUp();
+        $("#toolbar").slideUp();
 
-        var tablist = "#listTabs_" + ID;
-        $(tablist).show();
-        $(tabContent).show();
-
-
-    }
-
-    function itemover(ID) {
-        $(".sagmenu").css("display","none");
-
-        var sagmenu="#menu_" + ID;
-        $(sagmenu).addClass("sagmenu");
-        $(sagmenu).show();
-    }
-
-    function Words(ID) {
-        var name = "#words_" + ID;
-        //var nameWordsAdd = "#wordsadd_" + ID;
-
+        $("#ContentDiv").slideDown();
         
         $.ajax({
-            url: '@Url.Action("GetWordsOfList", "Lists")',
+            url: '@Url.Action("GetContentOfList", "Lists")',
             type: "POST",
             cache: true,
             async: true,
             data: { listID: ID },
             success: function (text, data) {
-                $(name).html(text);
-                $(name).show();
+                $("#WordsList").html(text);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("bir hata oluştu");
@@ -84,23 +109,11 @@
         });
     }
 
-    function KelimeEkle(ID) {
-        var name = "#wordsadd_" + ID;
-        //var nameWords = "#words_" + ID;
-        
-        $.ajax({
-            url: '@Url.Action("GetSearchWord", "Word")',
-            type: "GET",
-            cache: true,
-            async: true,
-            data: { listID: ID },
-            success: function (text, data) {
-                $(name).html(text);
-                $(name).show();
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                alert("bir hata oluştu");
-            }
-        });
+    function backtoList() {
+        $("#WordListsGroup").slideDown();
+        $("#toolbar").slideDown();
+        $("#ContentDiv").slideUp();
     }
+
+
 </script>

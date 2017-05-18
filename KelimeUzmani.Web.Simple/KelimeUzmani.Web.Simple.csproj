@@ -307,6 +307,8 @@
     <Content Include="Views\Lists\WordOfList.cshtml" />
     <Content Include="Views\Word\SearchList.cshtml" />
     <Content Include="Views\Word\GetSearchWord.cshtml" />
+    <Content Include="Views\Lists\GetContentOfList.cshtml" />
+    <Content Include="Views\Lists\WordTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<KelimeUzmani.Entity.WordListList>
+<table class="table" id="tblList">
+    <thead>
+        <tr class="bg-warning small">
+            <th>Kelime</th>
+            <th>Anlamı</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int a = 0;
+            foreach (var item in Model)
+            {
+                a++;
+                <tr id="WordOfList_@item.ID">
+                    <td>@item.Word.WordBody</td>
+                    <td>@item.Word.Description</td>
+                    <td><a href="javascript:void(0)" class="btn btn-outline-danger btn-sm float-right"><i class="fa fa-minus"></i></a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

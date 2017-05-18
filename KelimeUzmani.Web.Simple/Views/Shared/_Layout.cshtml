@@ -20,16 +20,19 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#">Hidden brand</a>
+            <a class="navbar-brand" href="#">Kelime Uzmanı</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="@Url.Action("Index","Word")">Kelimeler<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Listeler
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="@Url.Action("Index","Lists")">Sistemdeki Listeler</a>
+                        <a class="dropdown-item" href="#">Benim Listelerim</a>
+                    </div>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -39,20 +42,19 @@
         </div>
     </nav>
     <!-- Begin page content -->
-    <div class="constantmenu">
+    <div class="constantmenu hidden-lg-up">
 
     </div>
     <div class="container">
          @RenderBody()
       
-       
     </div>
 
-    <footer class="footer">
+    @*<footer class="footer">
         <div class="container">
             <span class="text-muted">www.kelimeuzmani.com</span>
         </div>
-    </footer>
+    </footer>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -15,7 +15,7 @@ namespace KelimeUzmani.Web.Simple.Controllers
         IWordList iList = new WordListBS();
         public ActionResult Index()
         {
-            List<WordList>  list= iList.GetUserLists(1);
+            List<WordList> list = iList.GetUserLists(2);
 
             return View(list);
         }
@@ -30,16 +30,36 @@ namespace KelimeUzmani.Web.Simple.Controllers
 
             wl = iList.SaveWordList(wl);
 
-            List<WordList> list = iList.GetUserLists(1);
+            List<WordList> list = iList.GetUserLists(2);
 
-            return PartialView("ListView",list);
+            return PartialView("ListView", list);
         }
 
         [HttpPost]
         public ActionResult GetWordsOfList(int listID)
         {
+            ViewBag.ListID = listID;
             return PartialView("WordOfList", iList.GetListByID(listID).WordListList);
         }
 
-       }
+        [HttpPost]
+        public ActionResult GetContentOfList(int listID)
+        {
+            WordList olist = iList.GetListByID(listID);
+            ViewBag.ListID = listID;
+            return PartialView(olist);
+        }
+
+        [HttpPost]
+        public ActionResult AddWordToList(int listID, int wordID)
+        {
+            iList.AddWordToList(listID, wordID);
+
+            List<WordListList> result = iList.GetWordLists(listID);
+
+            return PartialView("WordTable", result);
+
+        }
+
+    }
 }
