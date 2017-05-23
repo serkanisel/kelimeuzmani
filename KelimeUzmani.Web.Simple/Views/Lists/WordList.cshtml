@@ -1,0 +1,111 @@
+﻿@model KelimeUzmani.Entity.WordList
+
+
+<div class="row" style="margin-top:10px;margin-bottom:10px;">
+    <div class="col-sm-12 ">
+        <div class="float-left title">
+            <span>@Model.Name</span>
+            <small style="color:#808080;">Word Count : @Model.WordListList.Count</small>
+        </div>
+        <div class="float-right">
+
+            <ul class="nav nav-pill" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active btn btn-outline-primary borderradius0" data-toggle="pill" href="#words" role="tab"><i class="fa fa-list"></i> Kelime Listesi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-primary borderradius0" data-toggle="pill" href="#workingpanel" role="tab"><i class="fa fa-leaf"></i> Çalışma Ekranı</a>
+                </li>
+              
+            </ul>
+        </div>
+    </div>
+</div>
+
+@*<div class="constantdiv" style="display:none;" id="studyScreen">
+    <div class="float-right">
+        <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" onclick="$(this).parent().parent().fadeOut();"><i class="fa fa-close"></i></a>
+    </div>
+
+    <div style="width:50%;height:50%;background-color:#fff;top:50%;left:50%;">
+
+    </div>
+</div>*@
+
+
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="words" role="tabpanel">
+            <div id="kelimeListesi">
+
+            </div>
+    </div>
+    <div class="tab-pane" id="workingpanel" role="tabpanel">
+        <div>
+            @*<a href="javascript:void(0)" class="btn  btn-secondary" onclick="showConstantDiv()"><i class="fa fa-2x fa-anchor"></i> Önizleme</a>
+            <a href="javascript:void(0)" class="btn  btn-secondary"><i class="fa fa-2x fa-opencart"></i> Flash Cards</a>
+            <a href="javascript:void(0)" class="btn  btn-secondary"><i class="fa fa-2x fa-balance-scale"></i> Çoktan Seçmeli</a>
+            <a href="javascript:void(0)" class="btn  btn-secondary"><i class="fa fa-2x fa-address-card"></i> Boşluk Doldurma</a>
+            <a href="javascript:void(0)" class="btn  btn-secondary"><i class="fa fa-2x fa-bandcamp"></i> Yazma</a>*@
+
+            <ul class="nav nav-pill" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active btn btn-outline-secondary borderradius0" data-toggle="pill" href="#preview" role="tab"><i class="fa fa-anchor"></i> Önizleme</a> 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-secondary borderradius0" data-toggle="pill" href="#flashcard" role="tab"><i class="fa fa-opencart"></i> Flash Cards</a> 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-secondary borderradius0" data-toggle="pill" href="#optional" role="tab"><i class="fa fa-balance-scale"></i> Çoktan Seçmeli</a> 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-secondary borderradius0" data-toggle="pill" href="#filltheblank" role="tab"><i class="fa fa-address-card"></i> Boşluk Doldurma</a> 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-secondary borderradius0" data-toggle="pill" href="#writing" role="tab"><i class="fa fa-bandcamp"></i> Yazma</a> 
+                </li>
+
+            </ul>
+
+
+            <div class="tab-content">
+                <div class="tab-pane active workingpanel" id="preview" role="tabpanel">preview</div>
+                <div class="tab-pane workingpanel" id="flashcard" role="tabpanel">flashcard</div>
+                <div class="tab-pane workingpanel" id="optional" role="tabpanel">optional</div>
+                <div class="tab-pane workingpanel" id="filltheblank" role="tabpanel">filltheblank</div>
+                <div class="tab-pane workingpanel" id="writing" role="tabpanel">writing</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<a href="@Url.Action("Index","Lists")" class="btn btn-outline-secondary btn-sm"><i class="fa fa-chevron-circle-left"></i> Back to List</a>
+
+
+<script>
+    $(document).ready(function () {
+        KelimeListesi(@Model.ID);
+    })
+
+    function showConstantDiv() {
+        $("#studyScreen").fadeIn();
+    }
+    function KelimeListesi(ID) {
+        $.ajax({
+            url: '@Url.Action("GetContentOfList", "Lists")',
+            type: "POST",
+            cache: true,
+            async: true,
+            data: { listID: ID },
+            success: function (text, data) {
+                $("#kelimeListesi").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+</script>

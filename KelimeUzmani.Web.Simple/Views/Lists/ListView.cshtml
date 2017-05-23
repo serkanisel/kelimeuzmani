@@ -38,21 +38,44 @@
     }
 </style>
 
-<div class="row" id="WordListsGroup">
-    @{
-        int a = 0;
-        foreach (var item in Model)
-        {
-            a++;
-            <div class="col-lg-4 col-md-4 col-sm-3 borderOrange" id="list_@item.ID" onclick="GetContent(@item.ID)">
-                <div id="list_@item.ID" class="float-left">
-                    <span class="col-form-label" id="wordname_@item.ID">@item.Name</span><br />
-                    <span class="col-form-label" id="wordcount_@item.ID">Word Count: @item.WordListList.Count</span>
+<div id="WordListsGroup" class="row">
+    <div class="card-columns">
+        @{
+            int a = 0;
+            foreach (var item in Model)
+            {
+                a++;
+                @*<div class="col-lg-3 col-md-4 col-sm-6" style="margin-bottom:5px;">*@
+                <div class="card card-hover">
+                    @if (a % 2 != 0 && a % 3 != 0)
+                    {
+                        <img class="card-img-top img-fluid" src="~/images/language.jpg" alt="Card image cap">
+                    }
+
+                    @if (a % 2 == 0 && a % 3 != 0)
+                    {
+                        <img class="card-img-top img-fluid" src="~/images/language3.gif" alt="Card image cap">
+                    }
+
+                    @if (a % 3 == 0)
+                    {
+                        <img class="card-img-top img-fluid" src="~/images/language4.jpg" alt="Card image cap">
+                    }
+
+
+                    <div class="card-block ">
+                        <h4 class="card-title">@item.Name</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="@Url.Action("WordList","Lists",new { ID =  item.ID })" class="btn btn-primary"><i class="fa fa-graduation-cap" ></i> Listeyi Öğren</a>
+                    </div>
                 </div>
-            </div>
+                @*</div>*@
+            }
         }
-    }
-</div>
+        </div>
+    </div>
+
+
 
 
 <div class="ContentDiv" id="ContentDiv" style="display:none;">
@@ -78,14 +101,14 @@
 
 <script>
     function GetContent(ID) {
-        var list="#list_"+ID;
+        var list = "#list_" + ID;
 
-        var name="#wordname_" + ID;
-        var count="#wordcount_" + ID;
-        
+        var name = "#wordname_" + ID;
+        var count = "#wordcount_" + ID;
+
         $("#itemName").text($(name).text());
         $("#WordCount").text($(count).text());
-        
+
         $(".borderOrange").removeClass("border");
         $(list).addClass("border");
 
@@ -93,7 +116,7 @@
         $("#toolbar").slideUp();
 
         $("#ContentDiv").slideDown();
-        
+
         $.ajax({
             url: '@Url.Action("GetContentOfList", "Lists")',
             type: "POST",

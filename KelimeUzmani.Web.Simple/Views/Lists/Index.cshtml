@@ -6,7 +6,7 @@
         <i class="fa fa-plus"></i>
     </a>
 </p>
-<div class="collapse" id="listeEkle">
+<div class="collapse" id="listeEkle" style="margin-bottom:5px;">
     <div class="input-group">
         <input type="text" class="form-control" id="txtName">
         <span class="input-group-btn">
@@ -15,16 +15,18 @@
     </div>
 </div>
 
-        <div id="listPart">
-            @Html.Partial("ListView")
-        </div>
+<div class="container">
+    <div id="listPart" class="row">
+        @Html.Partial("ListView")
+    </div>
 
 
 
 
 
-<div id="result">
+    <div id="result" class="row">
 
+    </div>
 </div>
 <script>
     function Ekle() {

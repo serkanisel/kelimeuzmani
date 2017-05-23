@@ -231,6 +231,10 @@
     <Content Include="images\girl_mountain.jpg" />
     <Content Include="images\girl_train.jpg" />
     <Content Include="images\gondol.jpg" />
+    <Content Include="images\language.jpg" />
+    <Content Include="images\language2.png" />
+    <Content Include="images\language3.gif" />
+    <Content Include="images\language4.jpg" />
     <Content Include="images\loading.gif" />
     <Content Include="images\man_bench.jpg" />
     <Content Include="images\natureboy %281%29.jpg" />
@@ -309,6 +313,7 @@
     <Content Include="Views\Word\GetSearchWord.cshtml" />
     <Content Include="Views\Lists\GetContentOfList.cshtml" />
     <Content Include="Views\Lists\WordTable.cshtml" />
+    <Content Include="Views\Lists\WordList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

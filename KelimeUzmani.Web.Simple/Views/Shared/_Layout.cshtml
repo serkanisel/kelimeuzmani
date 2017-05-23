@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <title>@ViewBag.Title - Kelime Uzmanı</title>
-
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -41,13 +42,9 @@
             </form>
         </div>
     </nav>
-    <!-- Begin page content -->
-    <div class="constantmenu hidden-lg-up">
 
-    </div>
     <div class="container">
          @RenderBody()
-      
     </div>
 
     @*<footer class="footer">

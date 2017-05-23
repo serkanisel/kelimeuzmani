@@ -61,5 +61,11 @@ namespace KelimeUzmani.Web.Simple.Controllers
 
         }
 
+        public ActionResult  WordList(int ID)
+        {
+            WordList result= iList.GetListByID(ID);
+            return View(result);
+        }
+
     }
 }
