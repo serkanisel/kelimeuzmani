@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelimeUzmani.UnitOfWork", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KelimeUzmani.Web.Simple", "KelimeUzmani.Web.Simple\KelimeUzmani.Web.Simple.csproj", "{14B82A50-999F-4551-A4B2-126D1622AAAB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{991D524F-1018-4461-B550-6F485A69FF62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{2E89C804-D7EE-4075-BA49-AE82879EC0A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,10 @@ Global
 		{14B82A50-999F-4551-A4B2-126D1622AAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14B82A50-999F-4551-A4B2-126D1622AAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14B82A50-999F-4551-A4B2-126D1622AAAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E89C804-D7EE-4075-BA49-AE82879EC0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E89C804-D7EE-4075-BA49-AE82879EC0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E89C804-D7EE-4075-BA49-AE82879EC0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E89C804-D7EE-4075-BA49-AE82879EC0A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,5 +70,6 @@ Global
 		{DDFEE802-0B55-4FB4-9A38-7F42C7F9E308} = {96CAE709-101C-47AF-A00C-2C7175730E3E}
 		{92804CAE-2CAE-471B-8C70-47369979D973} = {96CAE709-101C-47AF-A00C-2C7175730E3E}
 		{14B82A50-999F-4551-A4B2-126D1622AAAB} = {C0AD9F2A-B5A7-4D91-9B51-D54764D59A96}
+		{2E89C804-D7EE-4075-BA49-AE82879EC0A3} = {991D524F-1018-4461-B550-6F485A69FF62}
 	EndGlobalSection
 EndGlobal

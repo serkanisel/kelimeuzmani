@@ -1,6 +1,7 @@
 ﻿using KelimeUzmani.Entity;
 using KelimeUzmani.UnitOfWork.Contract;
 using KelimeUzmani.UnitOfWork.UOW;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,15 +40,15 @@ namespace KelimeUzmani.Web.Simple.Controllers
         public ActionResult GetWordsOfList(int listID)
         {
             ViewBag.ListID = listID;
-            return PartialView("WordOfList", iList.GetListByID(listID).WordListList);
+            return PartialView("WordOfList", (IPagedList)iList.GetListByID(listID).WordListList.Take(10));
         }
 
         [HttpPost]
         public ActionResult GetContentOfList(int listID)
         {
-            WordList olist = iList.GetListByID(listID);
+            List<WordListList> olist = iList.GetWordLists(listID);
             ViewBag.ListID = listID;
-            return PartialView(olist);
+            return PartialView("WordOfList",olist.Take(10));
         }
 
         [HttpPost]
@@ -57,7 +58,8 @@ namespace KelimeUzmani.Web.Simple.Controllers
 
             List<WordListList> result = iList.GetWordLists(listID);
 
-            return PartialView("WordTable", result);
+
+            return PartialView("WordTable", (IPagedList)result);
 
         }
 
@@ -65,6 +67,20 @@ namespace KelimeUzmani.Web.Simple.Controllers
         {
             WordList result= iList.GetListByID(ID);
             return View(result);
+        }
+
+        public ActionResult WordTable(int listID,int count)
+        {
+            return PartialView("WordTable", iList.GetWordLists(listID).Take(count));
+        }
+
+        [HttpPost]
+        public ActionResult GetPreviewScreen(int listID)
+        {
+            List<WordListList> result= iList.GetWordLists(listID);
+
+            
+            return PartialView(result[0].Word);
         }
 
     }

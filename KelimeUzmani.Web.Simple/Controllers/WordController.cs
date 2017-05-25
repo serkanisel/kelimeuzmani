@@ -81,5 +81,7 @@ namespace KelimeUzmani.Web.Simple.Controllers
             ViewBag.fromIndex = 1;
             return PartialView("SearchList", result);
         }
+
+       
     }
 }

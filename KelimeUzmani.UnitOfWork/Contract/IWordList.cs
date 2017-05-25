@@ -17,5 +17,6 @@ namespace KelimeUzmani.UnitOfWork.Contract
         void AddWordToList(int listID, int wordID);
 
         List<WordListList> GetWordLists(int listID);
+
     }
 }

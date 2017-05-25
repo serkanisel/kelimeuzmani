@@ -15,7 +15,16 @@
                 a++;
                 <tr id="WordOfList_@item.ID">
                     <td>@item.Word.WordBody</td>
-                    <td>@item.Word.Description</td>
+                    <td >
+                        <span id="td_@item.ID">
+
+                        </span>
+                        <script>
+                            var name="#td_" + @item.ID;
+
+                            $(name).html("@item.Word.DescriptionHTML");
+                        </script>
+                    </td>
                     <td><a href="javascript:void(0)" class="btn btn-outline-danger btn-sm float-right"><i class="fa fa-minus"></i></a></td>
                 </tr>
             }

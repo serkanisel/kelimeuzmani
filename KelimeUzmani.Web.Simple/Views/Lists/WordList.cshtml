@@ -48,29 +48,31 @@
             <a href="javascript:void(0)" class="btn  btn-secondary"><i class="fa fa-2x fa-balance-scale"></i> Çoktan Seçmeli</a>
             <a href="javascript:void(0)" class="btn  btn-secondary"><i class="fa fa-2x fa-address-card"></i> Boşluk Doldurma</a>
             <a href="javascript:void(0)" class="btn  btn-secondary"><i class="fa fa-2x fa-bandcamp"></i> Yazma</a>*@
+            <div style="height:50px;margin-bottom:10px;">
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active " data-toggle="pill" href="#preview" role="tab" onclick="preview()"><i class="fa fa-anchor"></i> <span class="hidden-md-down hidden-sm-down"> Önizleme</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="pill" href="#flashcard" role="tab"><i class="fa fa-opencart"></i> <span class="hidden-md-down hidden-sm-down"> Flash Cards</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="pill" href="#optional" role="tab"><i class="fa fa-balance-scale"></i> <span class="hidden-md-down hidden-sm-down"> Çoktan Seçmeli</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="pill" href="#filltheblank" role="tab"><i class="fa fa-address-card"></i> <span class="hidden-md-down hidden-sm-down"> Boşluk Doldurma</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="pill" href="#writing" role="tab"><i class="fa fa-bandcamp"></i> <span class="hidden-md-down hidden-sm-down"> Yazma</span></a>
+                    </li>
 
-            <ul class="nav nav-pill" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active btn btn-outline-secondary borderradius0" data-toggle="pill" href="#preview" role="tab"><i class="fa fa-anchor"></i> Önizleme</a> 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-secondary borderradius0" data-toggle="pill" href="#flashcard" role="tab"><i class="fa fa-opencart"></i> Flash Cards</a> 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-secondary borderradius0" data-toggle="pill" href="#optional" role="tab"><i class="fa fa-balance-scale"></i> Çoktan Seçmeli</a> 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-secondary borderradius0" data-toggle="pill" href="#filltheblank" role="tab"><i class="fa fa-address-card"></i> Boşluk Doldurma</a> 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-secondary borderradius0" data-toggle="pill" href="#writing" role="tab"><i class="fa fa-bandcamp"></i> Yazma</a> 
-                </li>
-
-            </ul>
-
+                </ul>
+            </div>
 
             <div class="tab-content">
-                <div class="tab-pane active workingpanel" id="preview" role="tabpanel">preview</div>
+                <div class="tab-pane active workingpanel" id="preview" role="tabpanel">
+
+                </div>
                 <div class="tab-pane workingpanel" id="flashcard" role="tabpanel">flashcard</div>
                 <div class="tab-pane workingpanel" id="optional" role="tabpanel">optional</div>
                 <div class="tab-pane workingpanel" id="filltheblank" role="tabpanel">filltheblank</div>
@@ -82,8 +84,8 @@
 
 
 
-<a href="@Url.Action("Index","Lists")" class="btn btn-outline-secondary btn-sm"><i class="fa fa-chevron-circle-left"></i> Back to List</a>
-
+<a href="@Url.Action("Index","Lists")" class="btn btn-outline-secondary"><i class="fa fa-chevron-circle-left"></i> Back to List</a>
+<br />
 
 <script>
     $(document).ready(function () {
@@ -102,6 +104,24 @@
             data: { listID: ID },
             success: function (text, data) {
                 $("#kelimeListesi").html(text);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+            }
+        });
+    }
+
+    function preview() {
+        var ID=@Model.ID;
+
+        $.ajax({
+            url: '@Url.Action("GetPreviewScreen", "Lists")',
+            type: "POST",
+            cache: true,
+            async: true,
+            data: { listID: ID },
+            success: function (text, data) {
+                $("#preview").html(text);
             },
             error: function (jqXhr, textStatus, errorThrown) {
                 alert("bir hata oluştu");

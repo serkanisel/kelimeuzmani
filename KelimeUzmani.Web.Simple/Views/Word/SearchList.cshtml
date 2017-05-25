@@ -1,26 +1,28 @@
 ﻿@model List<KelimeUzmani.Entity.Word>
 
+<div class="row">
+    <div class="col-sm-12" style="margin-bottom:5px;">
+        <div class="float-right" style="margin:3px;">
+            <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" onclick="$(this).parent().parent().parent().slideUp();"><i class="fa fa-close"></i></a>
+        </div>
 
-<div class="float-right" style="margin:3px;">
-    <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" onclick="$(this).parent().parent().slideUp();"><i class="fa fa-close"></i></a>
-</div>
-<table class="table">
-    <tbody>
-        @{
-            int a = 0;
-            foreach (var item in Model)
-            {
-                a++;
-                <tr id="WordOfList_@item.ID">
-                    <th scope="row">@a.ToString()</th>
-                    <td>@item.WordBody</td>
-                    <td>@item.Description</td>
-                    <td><a href="#" class="btn btn-sm btn-outline-primary float-right" onclick="Ekle(@item.ID)"><i class="fa fa-plus-circle"></i></a></td>
-                </tr>
+
+        <div class="row" style="margin:5px;">
+            @{
+                foreach (var item in Model)
+                {
+                    <div class="col-sm-2 col-lg-2 col-sm-2 wordplaka">
+                        <div class="float-left">
+                            @item.WordBody
+                        </div>
+                        <div class="float-right">
+                            <a href="#" class="btn btn-sm btn-outline-primary" onclick="Ekle(@item.ID)"><i class="fa fa-plus-circle"></i></a>
+                        </div>
+
+                    </div>
+
+                }
             }
-        }
-    </tbody>
-</table>
-
-
-
+        </div>
+    </div>
+</div>
