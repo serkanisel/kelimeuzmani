@@ -124,16 +124,22 @@ textarea {
     color: #808080;
 }
 
+.card {
+    border-radius: 0px;
+    border: 1px solid #fff;
+    margin:3px;
+}
+
 .card-hover:hover {
     /*border-color:#0d7bf2;*/
     /*box-shadow: 4px 3px 4px 4px rgba(159, 141, 140, 0.5);*/
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    transition: all 0.2s ease-in;
+    transition: all 0.4s ease-in;
 }
 
 .card-hover {
     /*box-shadow: 0px 0px 0px 0px rgb(128, 128, 128);*/
-    transition: all 0.2s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
 
 .button {
@@ -198,11 +204,11 @@ textarea {
 
 
 .nav-pills .nav-link.active, .nav-pills .nav-item.show .nav-link {
-    background-color:transparent;
+    background-color: transparent;
     cursor: default;
     border-bottom: 6px solid #016ce0;
     transition: border-bottom 0.4s ease-in-out;
-    color:#016ce0;
+    color: #016ce0;
 }
 
 .nav-pills .nav-link {
@@ -221,7 +227,7 @@ textarea {
         transition: border-bottom 0.4s ease-in-out;
     }
 
-    .footer {
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -230,21 +236,41 @@ textarea {
 }
 
 .shadow {
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .wordplaka {
-    border-radius:20px;
-    background-color:#efefef;
-    margin:3px;
-    height:35px;
-        display: inline-block;
+    border-radius: 20px;
+    background-color: #efefef;
+    margin: 3px;
+    height: 35px;
+    display: inline-block;
     vertical-align: middle;
     float: none;
-    line-height:1.2em;
+    line-height: 1.2em;
 }
 
 .worddisplay {
-    height:40px;
-
+    height: 40px;
 }
+
+
+
+.mycard {
+    width: 100%;
+    border: 1px solid #016ce0;
+    height: 80px;
+    margin: 5px;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+    padding: 5px;
+    transition: border-left 0.4s ease;
+    border-left: 1px solid #016ce0;
+}
+
+    .mycard:hover {
+        /*border-color:#0d7bf2;*/
+        background-color:#efefef;
+        border-left: 8px solid #016ce0;
+        transition: border-left 0.4s ease-in-out;
+    }
