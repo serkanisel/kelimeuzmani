@@ -68,6 +68,19 @@ namespace WindowsFormsApplication1
 
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int a = 0;
+            label1.Text = "";
+            string b = "";
+            for (int i = 0; i < 31; i++)
+            {
+                a = 1 << i;
+                label1.Text = label1.Text +i.ToString() +" = "+ a.ToString() + "  ";
+                b += i.ToString() + " = " + a.ToString() + "  ";
+            }
+        }
     }
 
 }
