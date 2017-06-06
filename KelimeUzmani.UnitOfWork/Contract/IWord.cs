@@ -9,7 +9,7 @@ namespace KelimeUzmani.UnitOfWork.Contract
 {
     public interface IWord
     {
-        Word SaveWord(Word word);
+        Word SaveWord(Word word,int WordListID=0);
 
         List<Word> SearchWord(string searchText);
 

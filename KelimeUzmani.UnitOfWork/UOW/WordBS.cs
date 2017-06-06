@@ -23,11 +23,27 @@ namespace KelimeUzmani.UnitOfWork.UOW
             return _rep.GetList(p => p.UserID == userID);
         }
 
-        public Word SaveWord(Word word)
+        public Word SaveWord(Word word, int WordListID = 0)
         {
             RepositoryBase<Word> _rep = new RepositoryBase<Word>();
 
-            word = _rep.Add(word);
+            //sorgula eğer yoksa ekle. 
+            Word wTemp = _rep.Get(p => p.WordBody == word.WordBody);
+            if (wTemp == null)
+            {
+                word = _rep.Add(word);
+                //kelimeyi listeye ekle.
+                if (WordListID != 0)
+                    ListeyeEkle(word, WordListID);
+                return word;
+            }
+            else
+            {
+                if (WordListID != 0)
+                    ListeyeEkle(wTemp, WordListID);
+                return wTemp;
+            }
+
 
             //RepositoryBase<SampleSentence> _repSen = new RepositoryBase<SampleSentence>();
 
@@ -37,8 +53,17 @@ namespace KelimeUzmani.UnitOfWork.UOW
             //    _repSen.Add(item);
             //}
 
+        }
 
-            return word;
+        public void ListeyeEkle(Word word, int ListID)
+        {
+            RepositoryBase<WordListList> _rep = new RepositoryBase<WordListList>();
+
+            WordListList wlist = new WordListList();
+            wlist.isPublic = true;
+            wlist.WordID = word.ID;
+            wlist.WordListID = ListID;
+            _rep.Add(wlist);
         }
 
         public List<Word> SearchWord(string searchText)

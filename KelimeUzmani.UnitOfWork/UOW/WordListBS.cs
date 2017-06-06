@@ -69,6 +69,13 @@ namespace KelimeUzmani.UnitOfWork.UOW
             return wordList;
         }
 
+        public List<WordList> GetAllWordList()
+        {
+            RepositoryBase<WordList> _rep = new RepositoryBase<WordList>();
+
+            return _rep.GetList();
+        }
+
 
 
 

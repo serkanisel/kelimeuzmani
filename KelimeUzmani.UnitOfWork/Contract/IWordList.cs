@@ -18,5 +18,6 @@ namespace KelimeUzmani.UnitOfWork.Contract
 
         List<WordListList> GetWordLists(int listID);
 
+        List<WordList> GetAllWordList();
     }
 }
