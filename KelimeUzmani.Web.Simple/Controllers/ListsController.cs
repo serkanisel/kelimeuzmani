@@ -79,9 +79,20 @@ namespace KelimeUzmani.Web.Simple.Controllers
         {
             List<WordListList> result= iList.GetWordLists(listID);
 
-            
+            ViewBag.ListID = listID;
+            ViewBag.Wordcount = result.Count;
+
             return PartialView(result[0].Word);
         }
 
+        [HttpPost]
+        public JsonResult GetNextWord(int listID,int index)
+        {
+            Word w= iList.GetNextWord(listID,index);
+
+            ViewBag.ListID = listID;
+            
+            return Json(w, JsonRequestBehavior.AllowGet);
+        }
     }
 }

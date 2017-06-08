@@ -64,6 +64,7 @@ namespace KelimeUzmani.Web.Simple.Controllers
 
             List<Word> result= iWord.SearchWord(searchText);
             ViewBag.ListID = listID;
+            ViewBag.FromSearch = true;
             return PartialView("SearchList", result);
         }
 

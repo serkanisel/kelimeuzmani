@@ -13,7 +13,7 @@ namespace KelimeUzmani.Entity
         {
             get
             {
-                _descptionHTML = Description;
+                _descptionHTML = Description.Replace("<b>", "</br><b>");
                 _descptionHTML = _descptionHTML.Replace("&lt;", "<");
                 _descptionHTML = _descptionHTML.Replace("&gt;", ">");
                 return _descptionHTML;

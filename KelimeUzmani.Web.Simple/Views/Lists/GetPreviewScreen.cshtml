@@ -1,16 +1,57 @@
 ﻿@model KelimeUzmani.Entity.Word
-<div class="row" style="margin:auto;">
-    <div class="worddisplay">
-        @Model.WordBody
+
+<style>
+    b {
+        color:#ddd;
+    }
+</style>
+<div class="row col-sm-6 .offset-sm-6 bg-info" style="margin:auto; height:50px;color:#fff; padding:10px 15px 10px 10px; border-radius:20px;">
+    <div class="col-sm-12">
+        <div class="float-left"><span id="wordBody">@Model.WordBody</span></div>
+        <div class="float-right"><span id="count" class="badge-pill badge-default"></span></div>   
     </div>
 </div>
-
-<div class="row" style="margin:auto;">
-    @Model.Description
+<br />
+<div class="row col-sm-6 .offset-sm-6 bg-info" style="margin:auto;color:#fff;min-height:400px; max-height:400px;overflow-y:auto;border-radius:20px;padding:0px 15px 15px 15px;">
+    <span id="wordDescription">@Model.Description</span>
 </div>
 
-
-<div>
-    <a href="#" class="btn btn-danger"><i class="fa fa-arrow-left"></i></a>
-    <a href="#" class="btn btn-danger"><i class="fa fa-arrow-right"></i></a>
+<div class="row col-sm-2 .offset-sm-10"  style="margin:auto;height:50px;">
+    <span style="padding:5px;"><a href="#" class="btn btn-danger" onclick="getWord(1)"><i class="fa fa-arrow-left"></i></a></span>
+    <span style="padding:5px;"><a href="#" class="btn btn-danger" onclick="getWord(-1)"><i class="fa fa-arrow-right"></i></a></span>
 </div>
+<input type="hidden" id="hdnIndex" value="0"/>
+<script>
+    getWord(0);
+    function getWord(sayac) {
+
+        var index =parseInt($("#hdnIndex").val());
+        index = index-sayac;
+        var ID = @ViewBag.ListID;
+
+        if(index<0 || index>=@ViewBag.Wordcount)
+            return;
+
+        $.ajax({
+            url: '@Url.Action("GetNextWord", "Lists")',
+            type: "POST",
+            cache: true,
+            async: true,
+            data: { listID: ID,index:index },
+            success: function (text, data) {
+
+                $("#wordBody").html(text["WordBody"]);
+                $("#wordDescription").html(text["DescriptionHTML"]);
+                var sayi=index+1;
+                $("#count").html("<b style='color:#ffCC66;'>"+sayi +"</b> / " + @ViewBag.Wordcount);
+        },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("bir hata oluştu");
+        }
+        });
+
+
+
+        $("#hdnIndex").val(index);
+    }
+</script>

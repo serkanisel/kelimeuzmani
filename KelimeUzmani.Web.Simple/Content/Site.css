@@ -190,8 +190,8 @@ textarea {
 }
 
 .workingpanel {
-    height: 400px;
-    background-color: #efefef;
+    height: auto;
+    background-color: #fafafa;
     /*border-bottom:5px solid #eaeaea;
     border-left:5px solid #eaeaea;
     border-right:5px solid #eaeaea;*/
@@ -248,6 +248,7 @@ textarea {
     vertical-align: middle;
     float: none;
     line-height: 1.2em;
+    padding:5px 5px 5px 15px;
 }
 
 .worddisplay {

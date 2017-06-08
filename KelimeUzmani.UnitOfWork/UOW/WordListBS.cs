@@ -76,8 +76,14 @@ namespace KelimeUzmani.UnitOfWork.UOW
             return _rep.GetList();
         }
 
+        public Word GetNextWord(int listID, int index)
+        {
+            List<WordListList> lists = GetWordLists(listID);
 
+            RepositoryBase<Word> _rep = new RepositoryBase<Word>(false);
+            int wordID = lists[index].Word.ID;
 
-
+            return _rep.Get(p => p.ID==wordID); 
+        }
     }
 }
